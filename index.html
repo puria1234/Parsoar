@@ -467,7 +467,7 @@ Keep it conversational and straightforward.`,
         
         // Check for specific Puter API errors
         if (err && err.error && err.error.delegate === 'usage-limited-chat') {
-          errorMessage = '⚠️ Usage limit reached. The free AI analysis service has hit its daily limit. Please try again later.';
+          errorMessage = '⚠️ Usage limit reached. Parsoar has hit its daily limit. Please try again later.';
         } else if (err && err.error && err.error.message) {
           errorMessage = err.error.message;
         } else if (err && err.message) {
