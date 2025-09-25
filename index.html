@@ -384,6 +384,7 @@
     <img src="parsoar.png" alt="Parsoar Logo" class="logo">
     <h1>Parsoar</h1>
     <p class="subheader">Explain complex code in seconds</p>
+    <p style="color: #888; font-size: 0.9rem; margin: -30px 0 40px 0; font-style: italic;">Note: Free service with daily rate limits</p>
     
     <div class="input-section">
       <textarea id="codeInput" placeholder="Paste your code here"></textarea>
@@ -434,48 +435,18 @@ ${code}
 \`\`\`
 
 Keep it conversational and straightforward.`,
-          { model: "gpt-5", stream: true }
+          { model: "gpt-5-nano" }
         );
 
         output.style.display = 'block';
         output.classList.remove('placeholder');
-        output.innerHTML = '<div style="color: #cccccc; margin-bottom: 15px; font-weight: bold;">Code Analysis</div>';
-        
-        for await (const part of response) {
-          if (part?.text) {
-            // Add the new text to the existing content, preserving the header
-            const currentContent = output.innerHTML;
-            const headerMatch = currentContent.match(/<div style="color: #cccccc[^>]*>.*?<\/div>/);
-            const header = headerMatch ? headerMatch[0] : '';
-            const existingText = currentContent.replace(headerMatch ? headerMatch[0] : '', '');
-            
-            output.innerHTML = header + existingText + part.text;
-          }
-        }
+        output.innerHTML = '<div style="color: #cccccc; margin-bottom: 15px; font-weight: bold;">Code Analysis</div>' + response;
       } catch (err) {
         output.style.display = 'block';
         output.classList.remove('placeholder');
         console.error('Analysis error:', err);
         
-        let errorMessage = 'Unknown error occurred';
-        
-        // Check for specific Puter API errors
-        if (err && err.error && err.error.delegate === 'usage-limited-chat') {
-          errorMessage = '⚠️ Usage limit reached. Parsoar has hit its daily limit. Please try again later.';
-        } else if (err && err.error && err.error.message) {
-          errorMessage = err.error.message;
-        } else if (err && err.message) {
-          errorMessage = err.message;
-        } else if (typeof err === 'string') {
-          errorMessage = err;
-        } else if (err) {
-          // Check if puter is available
-          if (typeof puter === 'undefined') {
-            errorMessage = 'Puter.js library failed to load. Please check your internet connection and try again.';
-          } else {
-            errorMessage = 'Service temporarily unavailable. Please try again later.';
-          }
-        }
+        let errorMessage = '⚠️ Daily usage limit reached. Please try again later.';
         
         output.innerHTML = '<div style="color: #ff6b6b; line-height: 1.5;">' + errorMessage + '</div>';
       }
