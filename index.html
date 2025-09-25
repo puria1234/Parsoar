@@ -413,13 +413,22 @@
       const output = document.getElementById("output");
 
       if (!code) {
+        output.style.display = 'block';
         output.innerHTML = '<div style="color: #ff6b6b;">Please paste some code first</div>';
         return;
       }
 
+      // Check if Puter is available
+      if (typeof puter === 'undefined') {
+        output.style.display = 'block';
+        output.innerHTML = '<div style="color: #ff6b6b;">Error: Puter.js library failed to load. Please check your internet connection and refresh the page.</div>';
+        return;
+      }
+
       // Show professional loading state
+      output.style.display = 'block';
       output.classList.remove('placeholder');
-      output.innerHTML = '<div class="loading"><div class="spinner"></div>Analyzing your code</div>';
+      output.innerHTML = '<div style="color: #cccccc;">🔄 Analyzing your code...</div>';
 
       try {
         const response = await puter.ai.chat(
@@ -452,7 +461,23 @@ Keep it conversational and straightforward.`,
       } catch (err) {
         output.style.display = 'block';
         output.classList.remove('placeholder');
-        output.innerHTML = '<div style="color: #ff6b6b;">Analysis Error: ' + err.message + '</div>';
+        console.error('Analysis error:', err);
+        
+        let errorMessage = 'Unknown error occurred';
+        if (err && err.message) {
+          errorMessage = err.message;
+        } else if (typeof err === 'string') {
+          errorMessage = err;
+        } else if (err) {
+          errorMessage = JSON.stringify(err);
+        }
+        
+        // Check if puter is available
+        if (typeof puter === 'undefined') {
+          errorMessage = 'Puter.js library failed to load. Please check your internet connection and try again.';
+        }
+        
+        output.innerHTML = '<div style="color: #ff6b6b;">Analysis Error: ' + errorMessage + '</div>';
       }
     }
 
