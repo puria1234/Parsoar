@@ -464,20 +464,26 @@ Keep it conversational and straightforward.`,
         console.error('Analysis error:', err);
         
         let errorMessage = 'Unknown error occurred';
-        if (err && err.message) {
+        
+        // Check for specific Puter API errors
+        if (err && err.error && err.error.delegate === 'usage-limited-chat') {
+          errorMessage = '⚠️ Usage limit reached. The free AI analysis service has hit its daily limit. Please try again later.';
+        } else if (err && err.error && err.error.message) {
+          errorMessage = err.error.message;
+        } else if (err && err.message) {
           errorMessage = err.message;
         } else if (typeof err === 'string') {
           errorMessage = err;
         } else if (err) {
-          errorMessage = JSON.stringify(err);
+          // Check if puter is available
+          if (typeof puter === 'undefined') {
+            errorMessage = 'Puter.js library failed to load. Please check your internet connection and try again.';
+          } else {
+            errorMessage = 'Service temporarily unavailable. Please try again later.';
+          }
         }
         
-        // Check if puter is available
-        if (typeof puter === 'undefined') {
-          errorMessage = 'Puter.js library failed to load. Please check your internet connection and try again.';
-        }
-        
-        output.innerHTML = '<div style="color: #ff6b6b;">Analysis Error: ' + errorMessage + '</div>';
+        output.innerHTML = '<div style="color: #ff6b6b; line-height: 1.5;">' + errorMessage + '</div>';
       }
     }
 
