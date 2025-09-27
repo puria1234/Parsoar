@@ -9,6 +9,14 @@ A powerful code analysis tool that explains complex code in simple terms, powere
 - **Modern UI** - Clean, responsive design with dark theme
 - **Fast** - Quick analysis with real-time feedback
 
+## Getting Started
+
+1. Go to [https://parsoar.aaravpuri.org](https://parsoar.aaravpuri.org).
+2. Log in with your Google account.
+3. Paste your code into the input box under **“Paste your code here.”**
+4. Click **“Analyze Code.”**
+5. Instantly see a clear, structured explanation of the code.
+
 ## License
 
 MIT License
