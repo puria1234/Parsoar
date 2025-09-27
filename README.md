@@ -1,7 +1,3 @@
-Got it 👍 Since *Parsoar* is your AI code explainer app (with HTML, JS, CSS, and AI backend), here’s a clean **README.md** draft similar in style to the *Quiify* one we worked on earlier, but tailored to Parsoar:
-
----
-
 # Parsoar
 
 **Parsoar** is an AI-powered code explainer app that helps developers and students understand code step by step in plain English. Just paste your code, and Parsoar breaks it down into simple, easy-to-follow explanations.
