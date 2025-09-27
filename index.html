@@ -13,9 +13,14 @@
   
   <script src="https://js.puter.com/v2/"></script>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
+      width: 100%;
+    }
+
+    body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2a2a2a 100%);
       background-attachment: fixed;
@@ -24,28 +29,23 @@
       color: #e8e8e8;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      width: 100%;
+      /* Modern viewport height with fallbacks */
+      height: -webkit-fill-available; /* iOS Safari fallback */
+      height: 100dvh; /* Modern browsers */
+      min-height: 100vh; /* Fallback for older browsers */
       overflow-x: hidden;
-    }
-
-    html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
     }
 
     .hero-section {
       text-align: center;
       padding: 60px 20px;
-      min-height: 80vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
+      flex: 1; /* Take up available space, pushing footer to bottom */
     }
 
     .logo {
@@ -372,9 +372,7 @@
         font-size: 0.8rem;
       }
 
-      body {
-        min-height: 100svh; /* Use small viewport height for better mobile fit */
-      }
+
     }
 
   </style>
@@ -384,7 +382,7 @@
     <img src="parsoar.png" alt="Parsoar Logo" class="logo">
     <h1>Parsoar</h1>
     <p class="subheader">Explain complex code in seconds</p>
-    <p style="color: #888; font-size: 0.9rem; margin: -30px 0 40px 0; font-style: italic;">Free with daily rate limits</p>
+    <p style="color: #888; font-size: 0.9rem; margin: -30px 0 40px 0; font-style: italic;">Free with rate limits</p>
     
     <div class="input-section">
       <textarea id="codeInput" placeholder="Paste your code here"></textarea>
