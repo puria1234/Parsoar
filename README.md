@@ -11,7 +11,7 @@ A powerful code analysis tool that explains complex code in simple terms, powere
 
 ## Getting Started
 
-1. Go to [https://parsoar.aaravpuri.org](https://parsoar.aaravpuri.org).
+1. Go to [https://parsoar.vercel.app](https://parsoar.vercel.app).
 2. Log in with your Google account.
 3. Paste your code into the input box under **“Paste your code here.”**
 4. Click **“Analyze Code.”**
