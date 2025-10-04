@@ -18,4 +18,4 @@ A powerful code analysis tool that explains complex code in simple terms, powere
 
 ## License
 
-MIT License
+This project is licensed under the MIT License.
