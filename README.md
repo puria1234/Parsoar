@@ -1,6 +1,6 @@
 # Parsoar
 
-A powerful code analysis tool that explains complex code in simple terms, powered by Grok AI.
+A powerful code analysis tool that explains complex code in simple terms, powered by Gemini AI.
 
 ## Features
 
